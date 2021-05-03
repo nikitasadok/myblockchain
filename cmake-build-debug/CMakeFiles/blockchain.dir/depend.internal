@@ -3,7 +3,10 @@
 
 CMakeFiles/blockchain.dir/main.cpp.o
  /home/nikita/CLionProjects/blockchain/main.cpp
+ /home/nikita/CLionProjects/blockchain/src/Block.h
+ /home/nikita/CLionProjects/blockchain/src/Blockchain.h
  /home/nikita/CLionProjects/blockchain/src/Client.h
+ /home/nikita/CLionProjects/blockchain/src/Transaction.h
 CMakeFiles/blockchain.dir/src/Block.cpp.o
  /home/nikita/CLionProjects/blockchain/src/Block.cpp
  /home/nikita/CLionProjects/blockchain/src/Block.h
@@ -13,12 +16,16 @@ CMakeFiles/blockchain.dir/src/Blockchain.cpp.o
  /home/nikita/CLionProjects/blockchain/src/Blockchain.cpp
  /home/nikita/CLionProjects/blockchain/src/Blockchain.h
  /home/nikita/CLionProjects/blockchain/src/Transaction.h
+ /home/nikita/CLionProjects/blockchain/src/Utils.h
 CMakeFiles/blockchain.dir/src/Client.cpp.o
+ /home/nikita/CLionProjects/blockchain/src/Block.h
+ /home/nikita/CLionProjects/blockchain/src/Blockchain.h
  /home/nikita/CLionProjects/blockchain/src/Client.cpp
  /home/nikita/CLionProjects/blockchain/src/Client.h
-CMakeFiles/blockchain.dir/src/MerkleTree.cpp.o
- /home/nikita/CLionProjects/blockchain/src/MerkleTree.cpp
- /home/nikita/CLionProjects/blockchain/src/MerkleTree.h
+ /home/nikita/CLionProjects/blockchain/src/Transaction.h
 CMakeFiles/blockchain.dir/src/Transaction.cpp.o
  /home/nikita/CLionProjects/blockchain/src/Transaction.cpp
  /home/nikita/CLionProjects/blockchain/src/Transaction.h
+CMakeFiles/blockchain.dir/src/Utils.cpp.o
+ /home/nikita/CLionProjects/blockchain/src/Utils.cpp
+ /home/nikita/CLionProjects/blockchain/src/Utils.h

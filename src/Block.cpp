@@ -54,7 +54,7 @@ Block *Block::get_prev_block() {
 
 std::string Block::get_hash() {
     CryptoPP::SHA256 hash;
-    auto block_header_str = this->str();
+    auto block_header_str = this->header.str();
     std::string digest;
 
     hash.Update((const byte*)block_header_str.data(), block_header_str.size());
@@ -103,6 +103,10 @@ void Block::setBlockHeaderTimestamp(int i) {
 
 const std::vector<Transaction> &Block::getTransactions() const {
     return transactions;
+}
+
+void Block::setHashMerkleRoot(const std::string& hash) {
+    this->header.hash_merkle_root = hash;
 }
 
 std::string BlockHeader::str() {

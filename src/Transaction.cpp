@@ -3,6 +3,7 @@
 //
 
 #include <sstream>
+#include <utility>
 #include <crypto++/sha.h>
 #include "Transaction.h"
 
@@ -34,4 +35,10 @@ const std::string &Transaction::getTo() const {
 
 int64_t Transaction::getAmount() const {
     return amount;
+}
+
+Transaction::Transaction(std::string from, std::string to, int64_t amount) {
+    this->from = std::move(from);
+    this->to = std::move(to);
+    this->amount = amount;
 }

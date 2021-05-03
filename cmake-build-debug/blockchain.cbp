@@ -103,16 +103,16 @@
 		<Unit filename="/home/nikita/CLionProjects/blockchain/src/Client.h">
 			<Option target="blockchain"/>
 		</Unit>
-		<Unit filename="/home/nikita/CLionProjects/blockchain/src/MerkleTree.cpp">
-			<Option target="blockchain"/>
-		</Unit>
-		<Unit filename="/home/nikita/CLionProjects/blockchain/src/MerkleTree.h">
-			<Option target="blockchain"/>
-		</Unit>
 		<Unit filename="/home/nikita/CLionProjects/blockchain/src/Transaction.cpp">
 			<Option target="blockchain"/>
 		</Unit>
 		<Unit filename="/home/nikita/CLionProjects/blockchain/src/Transaction.h">
+			<Option target="blockchain"/>
+		</Unit>
+		<Unit filename="/home/nikita/CLionProjects/blockchain/src/Utils.cpp">
+			<Option target="blockchain"/>
+		</Unit>
+		<Unit filename="/home/nikita/CLionProjects/blockchain/src/Utils.h">
 			<Option target="blockchain"/>
 		</Unit>
 		<Unit filename="/home/nikita/CLionProjects/blockchain/CMakeLists.txt">

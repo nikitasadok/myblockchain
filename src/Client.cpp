@@ -3,6 +3,7 @@
 //
 
 #include <sstream>
+#include <utility>
 #include "Client.h"
 #include "iostream"
 #include "crypto++/cryptlib.h"
@@ -64,4 +65,21 @@ std::string Client::public_key_to_string(const CryptoPP::ECPPoint &pub_key) {
     std::stringstream ss;
     ss << pub_key.x << pub_key.y;
     return ss.str();
+}
+
+Client::Client(Blockchain *blockchain) {
+    this->blockchain = blockchain;
+    this->private_key = generate_private_key();
+    this->public_key = calculate_public_key(this->private_key);
+    this->address = generate_wallet_address(this->public_key);
+}
+
+void Client::make_transaction(std::string from, std::string to, int64_t amount) {
+    auto tran = Transaction(std::move(from), std::move(to), amount);
+
+    this->blockchain->add_transaction(tran);
+}
+
+const std::string &Client::getAddress() const {
+    return address;
 }

@@ -4,8 +4,10 @@
 
 #include "Blockchain.h"
 #include "crypto++/sha.h"
-#include <climits>
 #include <unordered_map>
+#include "Utils.h"
+#include <fstream>
+#include "iostream"
 
 void Blockchain::add_block(Block* block) {
     this->last = block;
@@ -47,19 +49,30 @@ void Blockchain::add_transaction(const Transaction &tran) {
     }
 
     this->pending_transactions.push_back(tran);
+
+    if (size == 0) {
+        auto b = new Block();
+        b->setTransactions(this->pending_transactions);
+        b->setBlockHeaderTimestamp(std::time(nullptr));
+        b->setBlockHeaderNonce(1337);
+        b->setHashMerkleRoot(b->get_merkle_root_hash());
+        add_block(b);
+    }
+
 }
 
 bool Blockchain::is_valid_guess(const std::string& hash, const int difficulty) {
-    return hash.substr(0,4) == "0000";
+    return hash.substr(0,difficulty) == std::string(difficulty, '0');
 }
 
 void Blockchain::mine() {
     auto block_candidate = this->create_block_candidate();
     while (true) {
         for (int i = 0; i < std::numeric_limits<int>::max(); i++) {
+            std::cout << i << std::endl;
             block_candidate->setBlockHeaderNonce(i);
             auto hash = block_candidate->get_hash();
-            if (is_valid_guess(hash, 4)) {
+            if (is_valid_guess(hash, 1)) {
                 return;
             }
         }
@@ -177,9 +190,56 @@ int64_t Blockchain::get_cur_bal(const std::string &address) {
 }
 
 bool Blockchain::transaction_allowed(const Transaction &tran) {
-    return tran.getAmount() <= this->get_cur_bal(tran.getFrom());
+    return tran.getAmount() <= this->get_cur_bal(tran.getFrom()) || this->size == 0;
 }
 
 bool Blockchain::address_is_known(const std::string& address) {
     return std::find(client_addresses.begin(), client_addresses.end(), address) != client_addresses.end();
+}
+
+std::string Blockchain::get_blockchain_merkle_hash() {
+    auto top = this->last;
+    std::vector<std::string> hashes;
+
+    while (top != nullptr) {
+        hashes.push_back(top->get_hash());
+        top = top->get_prev_block();
+    }
+
+    return Utils::build_merkle_tree(hashes);
+}
+
+void Blockchain::load_from_file(std::string filename) {
+
+}
+
+void Blockchain::save_to_file(const std::string& filename) {
+    std::ofstream file;
+    file.open(filename);
+    if (!file.is_open())
+        return;
+
+    file << "blockchain length: " << this->size << std::endl;
+    auto top = this->last;
+    int cnt = 1;
+    while (top != nullptr) {
+        auto header = top->get_block_header();
+        file << "----------" << std::endl;
+        file << "block #" << cnt << std::endl;
+        file << "Header:" << std::endl;
+        file << "prev_hash_root: " << header.hash_prev_block;
+        file << "hash_merkle_root:" <<  header.hash_merkle_root << std::endl;
+        file << "timestamp:" << header.timestamp_unix << std::endl;
+        file << "Nonce:" << header.nonce << std::endl;
+        file << "Target:" << header.target << std::endl;
+        file << "Number of transactions: " << top->getTransactions().size() << std::endl;
+        for (const auto& tran: top->getTransactions()) {
+            file << "###########" << std::endl;
+            file << "From: " << tran.getFrom() << std::endl;
+            file << "To: " << tran.getTo() << std::endl;
+            file << "Amount: " << tran.getAmount() << std::endl;
+        }
+        top = top->get_prev_block();
+        cnt++;
+    }
 }

@@ -250,33 +250,6 @@ src/Client.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/blockchain.dir/build.make CMakeFiles/blockchain.dir/src/Client.cpp.s
 .PHONY : src/Client.cpp.s
 
-src/MerkleTree.o: src/MerkleTree.cpp.o
-
-.PHONY : src/MerkleTree.o
-
-# target to build an object file
-src/MerkleTree.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/blockchain.dir/build.make CMakeFiles/blockchain.dir/src/MerkleTree.cpp.o
-.PHONY : src/MerkleTree.cpp.o
-
-src/MerkleTree.i: src/MerkleTree.cpp.i
-
-.PHONY : src/MerkleTree.i
-
-# target to preprocess a source file
-src/MerkleTree.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/blockchain.dir/build.make CMakeFiles/blockchain.dir/src/MerkleTree.cpp.i
-.PHONY : src/MerkleTree.cpp.i
-
-src/MerkleTree.s: src/MerkleTree.cpp.s
-
-.PHONY : src/MerkleTree.s
-
-# target to generate assembly for a file
-src/MerkleTree.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/blockchain.dir/build.make CMakeFiles/blockchain.dir/src/MerkleTree.cpp.s
-.PHONY : src/MerkleTree.cpp.s
-
 src/Transaction.o: src/Transaction.cpp.o
 
 .PHONY : src/Transaction.o
@@ -304,6 +277,33 @@ src/Transaction.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/blockchain.dir/build.make CMakeFiles/blockchain.dir/src/Transaction.cpp.s
 .PHONY : src/Transaction.cpp.s
 
+src/Utils.o: src/Utils.cpp.o
+
+.PHONY : src/Utils.o
+
+# target to build an object file
+src/Utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blockchain.dir/build.make CMakeFiles/blockchain.dir/src/Utils.cpp.o
+.PHONY : src/Utils.cpp.o
+
+src/Utils.i: src/Utils.cpp.i
+
+.PHONY : src/Utils.i
+
+# target to preprocess a source file
+src/Utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blockchain.dir/build.make CMakeFiles/blockchain.dir/src/Utils.cpp.i
+.PHONY : src/Utils.cpp.i
+
+src/Utils.s: src/Utils.cpp.s
+
+.PHONY : src/Utils.s
+
+# target to generate assembly for a file
+src/Utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/blockchain.dir/build.make CMakeFiles/blockchain.dir/src/Utils.cpp.s
+.PHONY : src/Utils.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -325,12 +325,12 @@ help:
 	@echo "... src/Client.o"
 	@echo "... src/Client.i"
 	@echo "... src/Client.s"
-	@echo "... src/MerkleTree.o"
-	@echo "... src/MerkleTree.i"
-	@echo "... src/MerkleTree.s"
 	@echo "... src/Transaction.o"
 	@echo "... src/Transaction.i"
 	@echo "... src/Transaction.s"
+	@echo "... src/Utils.o"
+	@echo "... src/Utils.i"
+	@echo "... src/Utils.s"
 .PHONY : help
 
 

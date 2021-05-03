@@ -141,18 +141,18 @@ CMakeFiles/blockchain.dir/src/Client.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/blockchain.dir/src/Client.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nikita/CLionProjects/blockchain/src/Client.cpp -o CMakeFiles/blockchain.dir/src/Client.cpp.s
 
-CMakeFiles/blockchain.dir/src/MerkleTree.cpp.o: CMakeFiles/blockchain.dir/flags.make
-CMakeFiles/blockchain.dir/src/MerkleTree.cpp.o: ../src/MerkleTree.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nikita/CLionProjects/blockchain/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/blockchain.dir/src/MerkleTree.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/blockchain.dir/src/MerkleTree.cpp.o -c /home/nikita/CLionProjects/blockchain/src/MerkleTree.cpp
+CMakeFiles/blockchain.dir/src/Utils.cpp.o: CMakeFiles/blockchain.dir/flags.make
+CMakeFiles/blockchain.dir/src/Utils.cpp.o: ../src/Utils.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/nikita/CLionProjects/blockchain/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/blockchain.dir/src/Utils.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/blockchain.dir/src/Utils.cpp.o -c /home/nikita/CLionProjects/blockchain/src/Utils.cpp
 
-CMakeFiles/blockchain.dir/src/MerkleTree.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/blockchain.dir/src/MerkleTree.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nikita/CLionProjects/blockchain/src/MerkleTree.cpp > CMakeFiles/blockchain.dir/src/MerkleTree.cpp.i
+CMakeFiles/blockchain.dir/src/Utils.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/blockchain.dir/src/Utils.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/nikita/CLionProjects/blockchain/src/Utils.cpp > CMakeFiles/blockchain.dir/src/Utils.cpp.i
 
-CMakeFiles/blockchain.dir/src/MerkleTree.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/blockchain.dir/src/MerkleTree.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nikita/CLionProjects/blockchain/src/MerkleTree.cpp -o CMakeFiles/blockchain.dir/src/MerkleTree.cpp.s
+CMakeFiles/blockchain.dir/src/Utils.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/blockchain.dir/src/Utils.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/nikita/CLionProjects/blockchain/src/Utils.cpp -o CMakeFiles/blockchain.dir/src/Utils.cpp.s
 
 # Object files for target blockchain
 blockchain_OBJECTS = \
@@ -161,7 +161,7 @@ blockchain_OBJECTS = \
 "CMakeFiles/blockchain.dir/src/Block.cpp.o" \
 "CMakeFiles/blockchain.dir/src/Blockchain.cpp.o" \
 "CMakeFiles/blockchain.dir/src/Client.cpp.o" \
-"CMakeFiles/blockchain.dir/src/MerkleTree.cpp.o"
+"CMakeFiles/blockchain.dir/src/Utils.cpp.o"
 
 # External object files for target blockchain
 blockchain_EXTERNAL_OBJECTS =
@@ -171,7 +171,7 @@ blockchain: CMakeFiles/blockchain.dir/src/Transaction.cpp.o
 blockchain: CMakeFiles/blockchain.dir/src/Block.cpp.o
 blockchain: CMakeFiles/blockchain.dir/src/Blockchain.cpp.o
 blockchain: CMakeFiles/blockchain.dir/src/Client.cpp.o
-blockchain: CMakeFiles/blockchain.dir/src/MerkleTree.cpp.o
+blockchain: CMakeFiles/blockchain.dir/src/Utils.cpp.o
 blockchain: CMakeFiles/blockchain.dir/build.make
 blockchain: /usr/lib/x86_64-linux-gnu/libcrypto++.a
 blockchain: CMakeFiles/blockchain.dir/link.txt

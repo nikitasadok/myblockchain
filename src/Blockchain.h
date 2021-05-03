@@ -25,11 +25,12 @@ private:
 public:
     bool is_valid();
     void load_from_file(std::string filename);
-    void save_to_file(std::string filename);
+    void save_to_file(const std::string& filename);
     void add_transaction(const Transaction& tran);
     void mine();
     std::pair<int64_t, int64_t> get_all_time_min_max(const std::string& address);
     std::vector<std::string> get_addresses_with_money(int block_id);
+    std::string get_blockchain_merkle_hash();
 };
 
 

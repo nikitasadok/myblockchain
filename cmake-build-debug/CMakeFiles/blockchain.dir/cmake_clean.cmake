@@ -3,8 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/blockchain.dir/src/Block.cpp.o"
   "CMakeFiles/blockchain.dir/src/Blockchain.cpp.o"
   "CMakeFiles/blockchain.dir/src/Client.cpp.o"
-  "CMakeFiles/blockchain.dir/src/MerkleTree.cpp.o"
   "CMakeFiles/blockchain.dir/src/Transaction.cpp.o"
+  "CMakeFiles/blockchain.dir/src/Utils.cpp.o"
   "blockchain"
   "blockchain.pdb"
 )

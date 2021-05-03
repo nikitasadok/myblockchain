@@ -18,7 +18,6 @@ struct BlockHeader {
     int target;
     int nonce;
 
-private:
     std::string str();
 };
 
@@ -32,6 +31,8 @@ public:
     void setTransactions(const std::vector<Transaction> &transactions);
 
     void setPrevBlock(Block *prevBlock);
+
+    void setHashMerkleRoot(const std::string& hash);
 
 private:
     int64_t  transaction_counter;

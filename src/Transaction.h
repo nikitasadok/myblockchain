@@ -7,6 +7,8 @@
 #include <string>
 
 class Transaction {
+public:
+    Transaction(std::string from, std::string to, int64_t amount);
     std::string from;
 public:
     const std::string &getFrom() const;
