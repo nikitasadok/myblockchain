@@ -11,6 +11,7 @@
 #include <vector>
 
 void Blockchain::add_block(Block* block) {
+    block->setPrevBlock(this->last);
     this->last = block;
     this->size++;
     this->pending_transactions.clear();
@@ -90,26 +91,26 @@ Block *Blockchain::create_block_candidate() {
 
 std::pair<int64_t, int64_t> Blockchain::get_all_time_min_max(const std::string& address) {
     std::cout << "size: " << this->size << std::endl;
-    auto cur_bal = get_bal_from_block(address, this->size - 1);
+    auto cur_bal = get_cur_bal(address);
     std::pair<int64_t, int64_t> result;
     int64_t min = cur_bal;
     int64_t max = cur_bal;
     std::cout << "min: " << min << std::endl;
     std::cout << "max: " << max << std::endl;
 
-    auto top = this->last->get_prev_block();
+    auto top = this->last;
     while (top != nullptr) {
         for (const auto &tran : top->getTransactions()) {
             if (tran.getFrom() == address) {
-                cur_bal -= tran.getAmount();
-                if (cur_bal < min)
-                    min = cur_bal;
-            }
-
-            if (tran.getTo() == address) {
                 cur_bal += tran.getAmount();
                 if (cur_bal > max)
                     max = cur_bal;
+            }
+
+            if (tran.getTo() == address) {
+                cur_bal -= tran.getAmount();
+                if (cur_bal < min)
+                    min = cur_bal;
             }
         }
         top = top->get_prev_block();
@@ -166,9 +167,6 @@ int64_t Blockchain::get_bal_from_block(const std::string& address, int block_id)
 
     while (top != nullptr) {
         for (const auto &tran : top->getTransactions()) {
-            std::cout << "from: " << tran.getFrom() << std::endl;
-            std::cout << "to: " << tran.getTo() << std::endl;
-            std::cout << "amount: " << tran.getAmount() << std::endl;
             if (tran.getFrom() == address)
                 bal -= tran.getAmount();
             if (tran.getTo() == address)

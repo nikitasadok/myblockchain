@@ -20,6 +20,22 @@ string
 vector
 -
 
+/home/nikita/CLionProjects/blockchain/src/Blockchain.cpp
+Blockchain.h
+/home/nikita/CLionProjects/blockchain/src/Blockchain.h
+crypto++/sha.h
+/home/nikita/CLionProjects/blockchain/src/crypto++/sha.h
+unordered_map
+-
+Utils.h
+/home/nikita/CLionProjects/blockchain/src/Utils.h
+fstream
+-
+iostream
+/home/nikita/CLionProjects/blockchain/src/iostream
+vector
+-
+
 /home/nikita/CLionProjects/blockchain/src/Blockchain.h
 Block.h
 /home/nikita/CLionProjects/blockchain/src/Block.h
@@ -38,5 +54,11 @@ Blockchain.h
 
 /home/nikita/CLionProjects/blockchain/src/Transaction.h
 string
+-
+
+/home/nikita/CLionProjects/blockchain/src/Utils.h
+string
+-
+vector
 -
 
