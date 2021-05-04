@@ -74,12 +74,12 @@ Client::Client(Blockchain *blockchain) {
     this->address = generate_wallet_address(this->public_key);
 }
 
-void Client::make_transaction(std::string from, std::string to, int64_t amount) {
-    auto tran = Transaction(std::move(from), std::move(to), amount);
-
-    this->blockchain->add_transaction(tran);
-}
-
 const std::string &Client::getAddress() const {
     return address;
+}
+
+void Client::make_transaction(std::string to, int64_t amount) {
+    auto tran = Transaction(this->address, std::move(to), amount);
+
+    this->blockchain->add_transaction(tran);
 }

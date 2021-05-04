@@ -25,7 +25,7 @@ public:
     std::string generate_private_key();
     CryptoPP::ECPPoint calculate_public_key(std::string private_key);
     std::string generate_wallet_address(const CryptoPP::ECPPoint& pub_key);
-    void make_transaction(std::string from ,std::string to, int64_t amount);
+    void make_transaction(std::string to, int64_t amount);
 };
 
 

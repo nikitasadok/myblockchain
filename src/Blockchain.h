@@ -31,6 +31,8 @@ public:
     std::pair<int64_t, int64_t> get_all_time_min_max(const std::string& address);
     std::vector<std::string> get_addresses_with_money(int block_id);
     std::string get_blockchain_merkle_hash();
+
+    void add_genesis_block(int64_t amount, const std::string &first_receiver);
 };
 
 
