@@ -6,12 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/nikita/CLionProjects/blockchain/main.cpp
-iostream
--
-src/Client.h
-/home/nikita/CLionProjects/blockchain/src/Client.h
-
 /home/nikita/CLionProjects/blockchain/src/Block.h
 Transaction.h
 /home/nikita/CLionProjects/blockchain/src/Transaction.h
@@ -35,6 +29,8 @@ iostream
 /home/nikita/CLionProjects/blockchain/src/iostream
 vector
 -
+sstream
+-
 
 /home/nikita/CLionProjects/blockchain/src/Blockchain.h
 Block.h
@@ -43,14 +39,6 @@ vector
 -
 utility
 -
-
-/home/nikita/CLionProjects/blockchain/src/Client.h
-string
--
-crypto++/ecp.h
--
-Blockchain.h
-/home/nikita/CLionProjects/blockchain/src/Blockchain.h
 
 /home/nikita/CLionProjects/blockchain/src/Transaction.h
 string

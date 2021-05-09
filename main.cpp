@@ -12,5 +12,15 @@ int main() {
     auto res = blockchain->get_all_time_min_max(client2->getAddress());
     std::cout << res.first << std::endl;
     std::cout << res.second << std::endl;
+
+    blockchain->save_to_file("somefile.txt");
+    auto blockchainCopy = new Blockchain();
+    auto client1Copy = new Client(blockchainCopy);
+    auto client2Copy = new Client(blockchainCopy);
+    blockchainCopy->load_from_file("somefile.txt");
+
+    res = blockchainCopy->get_all_time_min_max(client2->getAddress());
+    std::cout << res.first << std::endl;
+    std::cout << res.second << std::endl;
     return 0;
 }

@@ -9,6 +9,9 @@
 #include <fstream>
 #include "iostream"
 #include <vector>
+#include <sstream>
+
+const int blockNumFields = 9;
 
 void Blockchain::add_block(Block* block) {
     block->setPrevBlock(this->last);
@@ -209,9 +212,46 @@ void Blockchain::load_from_file(std::string filename) {
         return;
 
     std::string buf;
-    while (std::getline(file, buf)) {
 
+    std::getline(file, buf);
+    auto size = std::stoi(buf);
+    for (int i = 0; i < size && !file.eof(); i++) {
+        std::cout << "i: " << i << std::endl;
+        auto b = new Block();
+        std::getline(file, buf);
+        std::cout << "buf: " << buf << std::endl;
+        b->setHashPrevBlock(buf);
+        std::getline(file, buf);
+        std::cout << "buf: " << buf << std::endl;
+        b->setHashMerkleRoot(buf);
+        std::getline(file, buf);
+        std::cout << "buf: " << buf << std::endl;
+        b->setBlockHeaderTimestamp(std::stoi(buf));
+        std::getline(file, buf);
+        std::cout << "buf: " << buf << std::endl;
+        b->setBlockHeaderNonce(std::stoi(buf));
+        std::getline(file, buf);
+        std::cout << "buf: " << buf << std::endl;
+        b->setTarget(std::stoi(buf));
+        std::getline(file, buf);
+        std::cout << "buf: " << buf << std::endl;
+        auto tranNum = std::stoi(buf);
+        for (int j = 0; j < tranNum && !file.eof(); j++) {
+            std::getline(file, buf);
+            std::cout << "buf: " << buf << std::endl;
+            auto from = buf;
+            std::getline(file, buf);
+            std::cout << "buf: " << buf << std::endl;
+            auto to = buf;
+            std::getline(file, buf);
+            std::cout << "buf: " << buf << std::endl;
+            auto amount = std::stoi(buf);
+            Transaction tran(from, to, amount);
+            b->add_transaction(tran);
+        }
+        this->add_block(b);
     }
+
 
 }
 
@@ -221,29 +261,47 @@ void Blockchain::save_to_file(const std::string& filename) {
     if (!file.is_open())
         return;
 
-    file << "blockchain length: " << this->size << std::endl;
-    auto top = this->last;
-    int cnt = 1;
-    while (top != nullptr) {
+    std::vector<Block*> queue;
+
+    file << this->size << std::endl;
+    auto topQ = this->last;
+
+    while (topQ != nullptr) {
+        queue.push_back(topQ);
+        topQ = topQ->get_prev_block();
+    }
+
+    for (int i = queue.size() - 1; i >= 0; i--) {
+        auto header = queue[i]->get_block_header();
+        file <<  header.hash_prev_block << std::endl;
+        file <<  header.hash_merkle_root << std::endl;
+        file <<  header.timestamp_unix << std::endl;
+        file <<  header.nonce << std::endl;
+        file <<  header.target << std::endl;
+        file <<  queue[i]->getTransactions().size() << std::endl;
+        for (const auto& tran: queue[i]->getTransactions()) {
+            file << tran.getFrom() << std::endl;
+            file << tran.getTo() << std::endl;
+            file << tran.getAmount() << std::endl;
+        }
+    }
+   /* while (top != nullptr) {
         auto header = top->get_block_header();
-        file << "----------" << std::endl;
-        file << "block #" << cnt << std::endl;
-        file << "Header:" << std::endl;
-        file << "prev_hash_root: " << header.hash_prev_block;
-        file << "hash_merkle_root:" <<  header.hash_merkle_root << std::endl;
-        file << "timestamp:" << header.timestamp_unix << std::endl;
-        file << "Nonce:" << header.nonce << std::endl;
-        file << "Target:" << header.target << std::endl;
-        file << "Number of transactions: " << top->getTransactions().size() << std::endl;
+        file <<  header.hash_prev_block << std::endl;
+        file <<  header.hash_merkle_root << std::endl;
+        file <<  header.timestamp_unix << std::endl;
+        file <<  header.nonce << std::endl;
+        file <<  header.target << std::endl;
+        file <<  top->getTransactions().size() << std::endl;
         for (const auto& tran: top->getTransactions()) {
-            file << "###########" << std::endl;
-            file << "From: " << tran.getFrom() << std::endl;
-            file << "To: " << tran.getTo() << std::endl;
-            file << "Amount: " << tran.getAmount() << std::endl;
+            file << tran.getFrom() << std::endl;
+            file << tran.getTo() << std::endl;
+            file << tran.getAmount() << std::endl;
         }
         top = top->get_prev_block();
         cnt++;
-    }
+    }*/
+    file.close();
 }
 
 void Blockchain::add_genesis_block(int64_t amount, const std::string& first_receiver) {

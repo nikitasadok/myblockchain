@@ -4,6 +4,7 @@
 
 #include <crypto++/sha.h>
 #include <sstream>
+#include <crypto++/hex.h>
 #include "Block.h"
 void Block::add_transaction(const Transaction& tran) {
     this->transactions.push_back(tran);
@@ -55,13 +56,22 @@ Block *Block::get_prev_block() {
 std::string Block::get_hash() {
     CryptoPP::SHA256 hash;
     auto block_header_str = this->header.str();
-    std::string digest;
+    // std::string digest;
+    byte digest[hash.DigestSize()];
 
-    hash.Update((const byte*)block_header_str.data(), block_header_str.size());
-    digest.resize(hash.DigestSize());
-    hash.Final((byte*)&digest[0]);
+//    hash.Update((const byte*)block_header_str.data(), block_header_str.size());
+//    digest.resize(hash.DigestSize());
+//    hash.Final((byte*)&digest[0]);
 
-    return digest;
+    hash.CalculateDigest(digest, (byte *)block_header_str.c_str(), block_header_str.length());
+
+    CryptoPP::HexEncoder encoder;
+    std::string output;
+    encoder.Attach( new CryptoPP::StringSink( output ) );
+    encoder.Put( digest, sizeof(digest) );
+    encoder.MessageEnd();
+
+    return output;
 }
 
 BlockHeader Block::get_block_header() {
@@ -107,6 +117,14 @@ const std::vector<Transaction> &Block::getTransactions() const {
 
 void Block::setHashMerkleRoot(const std::string& hash) {
     this->header.hash_merkle_root = hash;
+}
+
+void Block::setHashPrevBlock(std::string hash) {
+    header.hash_merkle_root = hash;
+}
+
+void Block::setTarget(int target) {
+    this->header.target = target;
 }
 
 std::string BlockHeader::str() {

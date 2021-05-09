@@ -5,6 +5,7 @@
 #include <sstream>
 #include <utility>
 #include <crypto++/sha.h>
+#include <crypto++/hex.h>
 #include "Transaction.h"
 
 std::string Transaction::str() {
@@ -16,13 +17,17 @@ std::string Transaction::str() {
 std::string Transaction::get_hash() {
     CryptoPP::SHA256 hash;
     auto tran_str = this->str();
-    std::string digest;
+    byte digest[hash.DigestSize()];
 
-    hash.Update((const byte*)tran_str.data(), tran_str.size());
-    digest.resize(hash.DigestSize());
-    hash.Final((byte*)&digest[0]);
+    hash.CalculateDigest(digest, (byte *)tran_str.c_str(), tran_str.length());
 
-    return digest;
+    CryptoPP::HexEncoder encoder;
+    std::string output;
+    encoder.Attach( new CryptoPP::StringSink( output ) );
+    encoder.Put( digest, sizeof(digest) );
+    encoder.MessageEnd();
+
+    return output;
 }
 
 const std::string &Transaction::getFrom() const {

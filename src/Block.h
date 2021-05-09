@@ -32,7 +32,11 @@ public:
 
     void setPrevBlock(Block *prevBlock);
 
+    void setHashPrevBlock(std::string hash);
+
     void setHashMerkleRoot(const std::string& hash);
+
+    void setTarget(int target);
 
 private:
     int64_t  transaction_counter;

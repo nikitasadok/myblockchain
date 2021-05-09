@@ -41,24 +41,30 @@ CryptoPP::ECPPoint Client::calculate_public_key(std::string private_key) {
 }
 
 std::string Client::generate_wallet_address(const CryptoPP::ECPPoint &pub_key) {
-    CryptoPP::HexEncoder encoder(new CryptoPP::FileSink(std::cout));
-
-    auto str_pub_key = public_key_to_string(pub_key);
-    CryptoPP::SHA256 hash;
-    std::string digest;
-
-    hash.Update((const byte*)str_pub_key.data(), str_pub_key.size());
-    digest.resize(hash.DigestSize());
-    hash.Final((byte*)&digest[0]);
-
     CryptoPP::RIPEMD160 hash_ripe;
-    std::string digest_ripe;
-    hash_ripe.Update((const byte*)digest.data(), digest.size());
-    digest_ripe.resize(hash_ripe.DigestSize());
-    hash_ripe.Final((byte*)&digest_ripe[0]);
+    CryptoPP::SHA256 hash;
+    byte digest_ripe[hash_ripe.DigestSize()];
+    byte digest[hash.DigestSize()];
+    auto str_pub_key = public_key_to_string(pub_key);
+
+    hash.CalculateDigest(digest, (byte *)str_pub_key.c_str(), str_pub_key.length());
+
+    CryptoPP::HexEncoder encoder;
+    std::string output;
+    encoder.Attach( new CryptoPP::StringSink( output ) );
+    encoder.Put( digest, sizeof(digest) );
+    encoder.MessageEnd();
+
+    hash.CalculateDigest(digest_ripe, (byte *)output.c_str(), output.length());
+
+    CryptoPP::HexEncoder encoder_ripe;
+    std::string output_ripe;
+    encoder.Attach( new CryptoPP::StringSink( output_ripe ) );
+    encoder.Put( digest_ripe, sizeof(digest_ripe) );
+    encoder.MessageEnd();
 
     // todo maybe add some real base58 later
-    return digest_ripe;
+    return output_ripe;
 }
 
 std::string Client::public_key_to_string(const CryptoPP::ECPPoint &pub_key) {
